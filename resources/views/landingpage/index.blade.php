@@ -276,32 +276,35 @@
                         segera menghubungi kami</p>
                 </div>
                 <div class="row" mt-5 mb-5>
-                    <div class="col-lg-6">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="info-box">
-                                    <i class="fa fa-map-marker fa-2x"></i>
-                                    <h3>Alamat</h3>
-                                    <p>Kampung Terapi Hijau RW 03 Kelurahan Sukun, Kota Malang.</p>
+                    <div class="container-contact align-items-center">
+                        <div class="col-lg">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="info-box">
+                                        <i class="fa fa-map-marker fa-2x"></i>
+                                        <h3>Alamat</h3>
+                                        <p>Kampung Terapi Hijau RW 03 Kelurahan Sukun, Kota Malang.</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="info-box mt-4">
-                                    <i class="fa fa-instagram fa-2x"></i>
-                                    <h3>Instagram</h3>
-                                    <p><a>@omahbatiksukun</span></a></p>
+                                <div class="col-md-6">
+                                    <div class="info-box mt-4">
+                                        <i class="fa fa-instagram fa-2x"></i>
+                                        <h3>Instagram</h3>
+                                        <p><a>@omahbatiksukun</span></a></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="info-box mt-4">
-                                    <i class="fa fa-whatsapp fa-2x"></i>
-                                    <h3>Whatsapp</h3>
-                                    <p><a>082331257347</a></p>
+                                <div class="col-md-6">
+                                    <div class="info-box mt-4">
+                                        <i class="fa fa-whatsapp fa-2x"></i>
+                                        <h3>Whatsapp</h3>
+                                        <p><a>082331257347</a></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    
+                    {{-- <div class="col-lg-6">
                         <form action="forms/contact.php" method="post" role="form" class="php-email-form">
                             <div class="row">
                                 <div class="col-md-6 form-group">
@@ -327,7 +330,7 @@
                             </div>
                             <div class="text-center"><button type="submit">Send Message</button></div>
                         </form>
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>

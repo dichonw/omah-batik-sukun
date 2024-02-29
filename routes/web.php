@@ -18,7 +18,7 @@ use App\Http\Controllers\adminController;
 //     return view('welcome');
 // });
 
-Route::get('/', [LandingpageController::class, 'index']);
+Route::get('/', [LandingpageController::class, 'index'])->name('index');
 
 Route::controller(LandingpageController::class)->group(function(){
     //Go To Detail Product

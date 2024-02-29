@@ -55,7 +55,7 @@ class adminController extends Controller
         ]);
 
         Session::pull('token');
-        return to_route('login');
+        return to_route('index');
     }
 
     public function dashboard(){
