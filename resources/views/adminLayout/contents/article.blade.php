@@ -61,7 +61,7 @@
             style="height: 40px">
         @endif
         </td>
-        <td>{{ $article->description }}</td>
+        <td>{!! $article->description !!}</td>
         <td>{{ $article->optional_link }}</td>
         <td>
           <div class="container-button">
@@ -88,41 +88,40 @@
 <div class="modal fade" id="modal-create">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-    <div class="modal-header">
-      <h4 class="modal-title">Tambahkan Artikel Baru</h4>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form role="form" method="POST" action="{{ route('create_article') }}" enctype="multipart/form-data">
-        @csrf
-        <div class="form-group">
-          <label for="exampleInputEmail1">Judul Artikel</label>
-          <input type="text" class="form-control" name="article_title" placeholder="Masukan Judul Artikel" required>
+        <div class="modal-header">
+          <h4 class="modal-title">Tambahkan Artikel Baru</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div class="form-group">
-          <label for="exampleInputFile">Gambar</label>
-          <img class="img-preview img-fluid mb-3 col-sm-5">
-          <div class="input-group">
-            <input type="file" id="image" name="image" onchange="previewImage()">
-          </div>
+        <div class="modal-body">
+          <form role="form" method="POST" action="{{ route('create_article') }}" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+              <label for="exampleInputEmail1">Judul Artikel</label>
+              <input type="text" class="form-control" name="article_title" placeholder="Masukan Judul Artikel" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputFile">Gambar</label>
+              <img class="img-preview img-fluid mb-3 col-sm-5">
+              <div class="input-group">
+                <input type="file" id="image" name="image" onchange="previewImage()">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Deskripsi</label>
+              <textarea name="description" placeholder="Masukkan Deskripsi"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Link Youtube (Opsional)</label>
+              <input type="text" class="form-control" name="optional_link" placeholder="Masukan Link Youtube (Optional)">
+            </div>
+            <button type="button" class="btn btn-default float-sm-left" data-dismiss="modal">Keluar</button>
+            <button type="submit" class="btn btn-primary float-sm-right">Tambah Artikel</button>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Deskripsi</label>
-          <textarea name="description" placeholder="Masukkan Deskripsi"></textarea>
-          {{-- <input type="text" class="form-control" name="description" placeholder="Masukan Deskripsi" required> --}}
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Link (Opsional)</label>
-          <input type="text" class="form-control" name="optional_link" placeholder="Masukan Link (Optional)">
-        </div>
-        <button type="button" class="btn btn-default float-sm-left" data-dismiss="modal">Keluar</button>
-        <button type="submit" class="btn btn-primary float-sm-right">Tambah Artikel</button>
-      </form>
     </div>
   </div>
-</div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>

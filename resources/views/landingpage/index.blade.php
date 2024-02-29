@@ -120,7 +120,7 @@
                                             {{ $product->product_name }}</h5>
                                         <p class="card-text-detail"
                                             style="margin: 0 auto; font-size: 12px; color: rgb(80, 82, 82);">
-                                            {{ Str::limit($product->description, 50) }}
+                                            {!! Str::limit($product->description, 50) !!}
                                         </p>
                                         <h6 class="text mt-2">Rp. {{ number_format($product->price) }}</h6>
                                         <a href="https://api.whatsapp.com/send?phone=6285930221410&text={{ urlencode('Halo, saya berminat untuk membeli ' . $product->product_name . ' Seharga Rp. ' . number_format($product->price)) }}"
@@ -203,10 +203,10 @@
                 </div>
                 <div class="row" style="padding-top: 30px;">
                     @foreach ($dataArticle as $article)
-                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-3">
+                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-3 ">
                             <a href="/detail_article/{{ $article->id }}"
                                 style="text-decoration: none; color: inherit;">
-                                <div class="card" style="width: 23rem;">
+                                <div class="card" style="width: 21rem;">
                                     @if ($article->optional_link != null)
                                         <iframe src="{{ $article->optional_link }}" frameborder="0"
                                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -243,16 +243,16 @@
                                             {{ $article->created_at->format('d/m/Y') }}
                                         </p>
                                         <p class="card-text-detail"
-                                            style="margin: 0 auto; font-size: 12px; color: rgb(80, 82, 82);">
-                                            {{ Str::limit($article->description, 50) }}
+                                            style="margin: 0 auto; font-size: 8px; color: rgb(80, 82, 82);">
+                                            {!! Str::limit($article->description, 50) !!}
                                         </p>
                                         <h6 class="text mt-2" style="font-style: italic;color: rgb(80, 82, 82);">Read
                                             More ></h6>
                                         {{-- @if ($article->updated_at != $article->created_at)
-                    <div class="form-text text-secondary text-end mb-2">
-                    *Article has been edited at {{$article->updated_at->format('d/m/Y')}}
-                    </div>
-                @endif --}}
+                                            <div class="form-text text-secondary text-end mb-2">
+                                            *Article has been edited at {{$article->updated_at->format('d/m/Y')}}
+                                            </div>
+                                        @endif --}}
                                     </div>
                                 </div>
                             </a>
@@ -280,14 +280,14 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="info-box">
-                                    <i class="fa fa-map-marker fa-3x"></i>
+                                    <i class="fa fa-map-marker fa-2x"></i>
                                     <h3>Alamat</h3>
                                     <p>Kampung Terapi Hijau RW 03 Kelurahan Sukun, Kota Malang.</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="info-box mt-4">
-                                    <i class="fa fa-envelope fa-2x"></i>
+                                    <i class="fa fa-instagram fa-2x"></i>
                                     <h3>Instagram</h3>
                                     <p><a>@omahbatiksukun</span></a></p>
                                 </div>

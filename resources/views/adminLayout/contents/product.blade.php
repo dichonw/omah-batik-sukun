@@ -40,7 +40,7 @@
           <th>Nama produk</th>
           <th>Gambar</th>
           <th>Harga</th>
-          <th>Diskon</th>
+          {{-- <th>Diskon</th> --}}
           <th>Deskripsi</th>
           <th>Action</th>
         </tr>
@@ -63,8 +63,8 @@
           @endif
           </td>
           <td>Rp. {{number_format($product->price)}}</td>
-          <td>Rp. {{number_format($product->discount)}}</td>
-          <td>{{ $product->description }}</td>
+          {{-- <td>Rp. {{number_format($product->discount)}}</td> --}}
+          <td>{!! $product->description !!}</td>
           <td>
             <div class="container-button">
               <a class="btn btn-sm bg-info mb-2" href="/admin/product/update_product/{{ $product->id }}">
@@ -88,7 +88,7 @@
 
 {{-- Modal  Create Product--}}
 <div class="modal fade" id="modal-create">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Tambahkan Produk Baru</h4>
@@ -114,13 +114,13 @@
             <label for="exampleInputEmail1">Harga</label>
             <input type="number" class="form-control" name="price" placeholder="Masukan Harga Produk" required>
           </div>
-          <div class="form-group">
+          {{-- <div class="form-group">
             <label for="exampleInputEmail1">Diskon(Opsional)</label>
             <input type="number" class="form-control" name="discount" placeholder="Masukan Diskon Produk">
-          </div>
+          </div> --}}
           <div class="form-group">
-            <label>Deskripsi</label>
-            <textarea class="form-control" rows="3" name="description" placeholder="Deskripsi" required></textarea>  
+            <label for="exampleInputEmail1">Deskripsi</label>
+            <textarea name="description" placeholder="Masukkan Deskripsi"></textarea>
           </div>
           <button type="button" class="btn btn-default float-sm-left" data-dismiss="modal">Keluar</button>
           <button type="submit" class="btn btn-primary float-sm-right">Tambah Produk</button>
@@ -147,8 +147,8 @@
   }
 
   $(document).on('click','.delete',function(){
-        let id = $(this).attr('data-id');
-        $('#id').val(id);
+       let id = $(this).attr('data-id');
+       $('#id').val(id);
   });
 
   $('.show_confirm').click(function(event) {
@@ -168,6 +168,6 @@
           }
         });
     });
-  
+
 </script>
 @endsection

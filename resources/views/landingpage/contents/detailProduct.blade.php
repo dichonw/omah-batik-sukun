@@ -40,7 +40,7 @@
                                 <h2 class="card-text">
                                     {{ $product->product_name }}</h2>
                                 <p class="card-text-detail" style="margin: 0 auto; color: rgb(80, 82, 82);">
-                                    {{ $product->description }}
+                                    {!! $product->description !!}
                                 </p>
                                 <h4 class="text mt-2">Rp. {{ number_format($product->price) }}</h4>
                                 <a href="https://api.whatsapp.com/send?phone=6285930221410&text={{ urlencode('Halo, saya berminat untuk membeli ' . $product->product_name . ' Seharga Rp. ' . number_format($product->price)) }}"
@@ -79,7 +79,7 @@
                                             {{ $otherProduct->product_name }}</h5>
                                         <p class="card-text-detail"
                                             style="margin: 0 auto; font-size: 12px; color: rgb(80, 82, 82);">
-                                            {{ Str::limit($otherProduct->description, 50) }}
+                                            {!! Str::limit($otherProduct->description, 50) !!}
                                         </p>
                                         <h6 class="text mt-2">Rp. {{ number_format($otherProduct->price) }}</h6>
                                         <a href="https://api.whatsapp.com/send?phone=6285930221410&text={{ urlencode('Halo, saya berminat untuk membeli ' . $otherProduct->product_name . ' Seharga Rp. ' . number_format($otherProduct->price)) }}"

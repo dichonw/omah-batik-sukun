@@ -140,6 +140,69 @@ class adminController extends Controller
         }
     }
 
+    public function delete_admin($id){
+        // Delete data in database
+        $delete_admin = Users::where('id',$id)->delete();
+
+        if ($delete_admin) {
+            return redirect()->back()
+            ->with('flash_message', 'Admin Berhasil Dihapus!')
+            ->with('flash_type', 'alert alert-success');
+        } else {
+            return redirect()->back()
+            ->with('flash_message', 'Admin Gagal Dihapus!')
+            ->with('flash_type', 'alert alert-danger');
+        }
+        return redirect()->back();
+    }
+
+    public function update_admin($id){
+        $dataAdmins = Users::where('id',$id)->get();
+        return view('adminLayout.contents.edit.editAdmins', [
+            'dataAdmins' => $dataAdmins
+        ]);
+    }
+
+    public function edit_admin(Request $request){
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|min:6',
+            'name_user' => 'required',
+            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'min:6'],[
+                'username.required' => 'Kolom username wajib diisi.',
+                'username.min' => 'Username setidaknya harus berisi 6 karakter',
+                'name_user.required' => 'Kolom Nama Admin wajib diisi.',
+                'password.min' => 'Password setidaknya harus berisi 6 karakter',
+                'password.same' => 'Password dan Konfirmasi password yang dimasukan harus sama.',
+                'password_confirmation.min' => 'Konfirmasi Password setidaknya harus berisi 6 karakter',
+        ]);
+
+        $current_date_time = date('Y-m-d H:i:s');
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }else{
+            $admin = Users::where('id',$request->id)->update([
+                "username" => $request->username,
+                "name_user" => $request->name_user,
+                "password" => bcrypt($request->password),
+                "updated_at" => $current_date_time,
+            ]);
+        }
+
+        if ($admin) {
+            return redirect('/admin/list_admin')
+            ->with('flash_message', 'Admin Berhasil Diubah!')
+            ->with('flash_type', 'alert alert-success');
+        } else {
+            return redirect('/admin/list_admin')
+            ->with('flash_message', 'Admin Gagal Diubah!')
+            ->with('flash_type', 'alert alert-danger');
+        }
+    }
+
     public function create_product(Request $request){
         // Validasi request
         $request->validate([
@@ -200,22 +263,48 @@ class adminController extends Controller
     }
 
     public function edit_product(Request $request){
-        // Validasi request
-        $request->validate([
-            'image' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
+        $product = ProductModel::find($request->id);
+        $namaFileDatabase = $product->image;
 
-        // Save Image to directory
-        $file =  $request->file('image');
+        // Mendapatkan nama file yang diunggah, jika ada
+        $uploadedFile = $request->file('image');
+        $uploadedFileName = null;
 
-        if($request->oldImage){
-            File::delete('assets/img/product/'.$request->oldImage);
+        if ($uploadedFile) {
+            $uploadedFileName = $uploadedFile->getClientOriginalName();
         }
 
-        $namaFile = $file->getClientOriginalName();
-        $file->move('assets/img/product',$file->getClientOriginalName());
+        // Validasi hanya jika file diunggah dan nama file tidak sama dengan nama file di database
+        if ($uploadedFileName && $namaFileDatabase !== $uploadedFileName) {
+            // Validasi file baru yang diunggah
+            $validator = Validator::make($request->all(), [
+                'image' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            ],
+            [
+                'image.required' => 'Gambar Wajib diisi',
+            ]);
 
-        $product = ProductModel::where('id',$request->id)->update([
+            if ($validator->fails()) {
+                return redirect()->back()->withInput()->withErrors($validator);
+            }
+
+            // Jika validasi berhasil, gunakan nama file yang baru diunggah
+            $namaFile = $uploadedFileName;
+
+            // Pindahkan file baru ke direktori
+            $uploadedFile->move('assets/img/product', $namaFile);
+
+            // Hapus file lama jika ada
+            if ($namaFileDatabase && File::exists('assets/img/product/'.$namaFileDatabase)){
+                File::delete('assets/img/product/'.$namaFileDatabase);
+            }
+        } else {
+            // Jika tidak ada file baru yang diunggah, gunakan nama file dari database
+            $namaFile = $namaFileDatabase;
+        }
+
+        // Update data artikel
+        $product->update([
             'product_name' => $request->product_name,
             'image' => $namaFile,
             'price' => $request->price,

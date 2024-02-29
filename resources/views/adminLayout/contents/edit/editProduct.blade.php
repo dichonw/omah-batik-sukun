@@ -37,10 +37,10 @@
                 <label for="exampleInputEmail1">Harga</label>
                 <input type="number" class="form-control" id="exampleInputEmail1" name="price" placeholder="Masukan Harga Produk" value="{{ $product->price }}">
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="exampleInputEmail1">Diskon(Opsional)</label>
                 <input type="number" class="form-control" id="exampleInputEmail1" name="discount" placeholder="Masukan Diskon Produk" value="{{ $product->discount }}">
-            </div>
+            </div> --}}
             <div class="form-group">
                 <label>Deskripsi</label>
                 <textarea class="form-control" rows="3" name="description" placeholder="Masukan Deskripsi">{{ $product->description }}</textarea>  

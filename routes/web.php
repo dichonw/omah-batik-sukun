@@ -43,8 +43,14 @@ Route::controller(adminController::class)->group(function(){
     //Admin
     // Go To Form Add Admin
     Route::get('/admin/list_admin/form_admin', 'form_admin')->name('form_admin');
-    // Create New Product
+    // Create New Admin
     Route::post('/admin/list_admin/create_admin', 'create_admin')->name('create_admin');
+    // Delete Admin
+    Route::delete('/admin/list_admin/delete_admin/{id}', 'delete_admin')->name('delete_admin');
+    //Go To Update Page Admin
+    Route::get('/admin/list_admin/update_admin/{id}', 'update_admin')->name('update_admin');
+    //Edit Data Admin 
+    Route::post('/admin/list_admin/edit_admin/{id}', 'edit_admin')->name('edit_admin');
 
     //Product
     // Create New Product

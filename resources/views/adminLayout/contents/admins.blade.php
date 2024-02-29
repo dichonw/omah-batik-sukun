@@ -53,10 +53,10 @@
           <td>{{ $admins->username }}</td>
           <td>
             <div class="container-button">
-              <a class="btn btn-sm bg-info mb-2" href="/admin/product/update_product/{{ $admins->id }}">
+              <a class="btn btn-sm bg-info mb-2" href="/admin/list_admin/update_admin/{{ $admins->id }}">
                 <i class="fas fa-edit"></i> Ubah
               </a>
-              <form method="POST" action="{{ route('delete_product', $admins->id) }}">
+              <form method="POST" action="{{ route('delete_admin', $admins->id) }}">
                 @csrf
                 <input name="_method" type="hidden" value="DELETE">
                 <a type="submit" class="btn btn-sm bg-danger show_confirm" data-toggle="tooltip" title='Delete'>
@@ -73,7 +73,7 @@
   </div>
 
 {{-- Modal  Create Product--}}
-<div class="modal fade" id="modal-create">
+{{-- <div class="modal fade" id="modal-create">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -114,7 +114,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
 <script>
