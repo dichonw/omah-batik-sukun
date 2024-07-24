@@ -63,7 +63,7 @@
           @endif
           </td>
           <td>Rp. {{number_format($product->price)}}</td>
-          {{-- <td>Rp. {{number_format($product->discount)}}</td> --}}
+          <td>Rp. {{number_format($product->discount)}}</td>
           <td>{!! $product->description !!}</td>
           <td>
             <div class="container-button">
@@ -114,10 +114,10 @@
             <label for="exampleInputEmail1">Harga</label>
             <input type="number" class="form-control" name="price" placeholder="Masukan Harga Produk" required>
           </div>
-          {{-- <div class="form-group">
+          <div class="form-group">
             <label for="exampleInputEmail1">Diskon(Opsional)</label>
             <input type="number" class="form-control" name="discount" placeholder="Masukan Diskon Produk">
-          </div> --}}
+          </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Deskripsi</label>
             <textarea name="description" placeholder="Masukkan Deskripsi"></textarea>

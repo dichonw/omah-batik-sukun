@@ -37,18 +37,24 @@
             <div class="row" style="padding-top: 100px;">
                 <div class="col-lg-12">
                     @if( in_array(pathinfo($article->image, PATHINFO_EXTENSION), ['png', 'jpg', 'jpeg','PNG', 'JPG', 'JPEG']))
-                        <img src="{{ asset('/assets/img/article') }}/{{$article->image}}" class="card-img-top responsive-img" alt="..." >
+                        <img src="{{ asset('/assets/img/article') }}/{{$article->image}}" class="card-img-top responsive-img" alt="..." 
+                        style="
+                        max-height: 400px;
+                        width: 100%;">
                     @else
                     <div>GADA GAMBAR</div>
                         <img src="https://www.freeiconspng.com/uploads/file-txt-icon--icon-search-engine--iconfinder-14.png"
-                        class="card-img-top" alt="...">
+                        class="card-img-top" alt="..." 
+                        style="
+                        max-height: 400px;
+                        width: 100%;">
                     @endif
                 </div>
-                <div class="col-lg-12 pt-4 pt-lg-0 mt-2">
+                <div class="col-lg-6 pt-4 pt-lg-0 mt-2 mx-xl-auto">
                     <div class="card-body">
-                        <p class="card-text-detail mb-1" style="margin: 0 auto; color: rgb(80, 82, 82);">
+                        <div class="card-text-detail my-2" style="font-size: 14px; margin: 0 auto; color: rgb(80, 82, 82);">
                             <i class="fa fa-clock-o"></i>&nbsp; {{ $article->created_at->format('d/m/Y')  }}
-                        </p>
+                        </div>
                         <h2 class="card-text">{{$article->article_title}}</h2>
                         <p class="card-text-detail" style="margin: 0 auto; color: rgb(80, 82, 82);">
                             {!! $article->description !!}

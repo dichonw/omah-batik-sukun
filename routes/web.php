@@ -25,6 +25,8 @@ Route::controller(LandingpageController::class)->group(function(){
     Route::get('/detail_product/{id}', 'detail_product')->name('detail_product');
     //Go To Detail Article
     Route::get('/detail_article/{id}', 'detail_article')->name('detail_article');
+    //Send Mail
+    Route::post('/send_mail', 'send_mail')->name('send_mail');
 });
 
 Route::controller(adminController::class)->group(function(){

@@ -30,67 +30,72 @@
         <section id="about" class="container-fluid">
             <div class="container mb-5" style="padding-top: 30px;">
                 @foreach ($dataProduct as $product)
-                    <div class="row" style="padding-top: 100px;">
-                        <div class="col-lg-6">
-                            <img src="../assets/img/product/{{ $product->image }}" class="img-fluid" alt="Produk"
-                                style="max-height: 500px;">
-                        </div>
-                        <div class="col-lg-6 pt-4 pt-lg-0">
-                            <div class="card-body">
-                                <h2 class="card-text">
-                                    {{ $product->product_name }}</h2>
-                                <p class="card-text-detail" style="margin: 0 auto; color: rgb(80, 82, 82);">
-                                    {!! $product->description !!}
-                                </p>
-                                <h4 class="text mt-2">Rp. {{ number_format($product->price) }}</h4>
-                                <a href="https://api.whatsapp.com/send?phone=6285930221410&text={{ urlencode('Halo, saya berminat untuk membeli ' . $product->product_name . ' Seharga Rp. ' . number_format($product->price)) }}"
-                                    target="_blank" style="text-decoration: none">
-                                    <h4 class="text text-success mt-3" style="cursor: pointer;"><i
-                                            class="fa fa-whatsapp"></i> Hubungi Kami</h4>
-                                </a>
-
+                    <div style="padding-top: 100px; margin-bottom: 50px;">
+                        <div class="container px-4 px-lg-4">
+                            <div class="row gx-4 gx-lg-5 align-items-center">
+                                <div class="col-md-6" style="max-height: 700px;"><img class="card-img-top mb-5 mb-md-0" src="../assets/img/product/{{ $product->image }}" alt="..." /></div>
+                                <div class="col-md-6">
+                                    <div class="small mb-1">Detail Produk</div>
+                                    <h1 class="display-5 fw-bolder"> {{ $product->product_name }}</h1>
+                                    <div class="fs-5 mb-2">
+                                    @if($product->discount > 0)
+                                        <span class="text-decoration-line-through">Rp. {{ number_format($product->price) }}</span>
+                                        <span>Rp. {{ number_format($product->price - $product->discount) }}</span>
+                                    @else
+                                        <span>Rp. {{ number_format($product->price) }}</span>
+                                    @endif
+                                    </div>
+                                    <p class="lead">{!! $product->description !!}</p>
+                                    <a href="https://api.whatsapp.com/send?phone=6285930221410&text={{ urlencode('Halo, saya berminat untuk membeli ' . $product->product_name . ' Seharga Rp. ' . number_format($product->price-$product->discount)) }}"
+                                        target="_blank" style="text-decoration: none">
+                                        <h4 class="text text-success mt-3" style="cursor: pointer;"><i
+                                                class="fa fa-whatsapp"></i> Hubungi Kami</h4>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
                 <!-- Other Product -->
-                <div class="row" style="padding-top: 60px;">
-                    <h5 style="margin-bottom: 20px;">PRODUK LAIN DARI KAMI</h5>
+                <div class="row px-4">
+                    <h4 style="margin-top:30px; margin-bottom: 30px;">Produk Lain Dari Kami</h4>
                     @foreach ($dataOtherProduct as $otherProduct)
-                        <div class="col-lg-3 col-md-6 d-flex align-items-stretch mb-3">
-                            <div class="card" style="width: 25rem;">
-                                <a href="/detail_product/{{ $otherProduct->id }}"
-                                    style="text-decoration: none; color: inherit;">
-                                    @if (in_array(pathinfo($otherProduct->image, PATHINFO_EXTENSION), ['png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG']))
-                                        <img src="{{ asset('/assets/img/product') }}/{{ $otherProduct->image }}"
-                                            class="card-img-top" alt="..."
-                                            style="
-                                            object-fit: none; 
-                                            object-position: center; 
-                                            height: 280px;
-                                            width: 100%;">
+                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch mb-3">
+                        <div class="card" style="width: 25rem;">
+                            <a href="/detail_product/{{ $otherProduct->id }}"
+                                style="text-decoration: none; color: inherit;">
+                                @if (in_array(pathinfo($otherProduct->image, PATHINFO_EXTENSION), ['png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG']))
+                                    <img src="{{ asset('/assets/img/product') }}/{{ $otherProduct->image }}"
+                                        class="card-img-top" alt="..."
+                                        style="
+                                        max-height: 400px;
+                                        width: 100%;">
+                                @else
+                                    <img src="https://www.freeiconspng.com/uploads/file-txt-icon--icon-search-engine--iconfinder-14.png"
+                                        class="card-img-top" alt="..."
+                                        style="
+                                        max-height: 400px;
+                                        width: 100%;">
+                                @endif
+                                <div class="card-body">
+                                    <h5 class="card-text"
+                                        style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 18px;">
+                                        {{ $otherProduct->product_name }}</h5>
+                                    @if ($otherProduct->discount > 0)
+                                        <s><h6 class="text mt-2" style="font-size: 14px; color: rgb(156, 155, 154);">Rp. {{ number_format($otherProduct->price) }}</h6></s>
+                                        <h6 class="text mt-2" style="font-size: 16px">Rp. {{ number_format($otherProduct->price - $otherProduct->discount) }}</h6>
                                     @else
-                                        <img src="https://www.freeiconspng.com/uploads/file-txt-icon--icon-search-engine--iconfinder-14.png"
-                                            class="card-img-top" alt="..." style="width: 80%;">
+                                        <h6 class="text mt-2" style="font-size: 16px">Rp. {{ number_format($otherProduct->price) }}</h6>
                                     @endif
-                                    <div class="card-body">
-                                        <h5 class="card-text"
-                                            style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-                                            {{ $otherProduct->product_name }}</h5>
-                                        <p class="card-text-detail"
-                                            style="margin: 0 auto; font-size: 12px; color: rgb(80, 82, 82);">
-                                            {!! Str::limit($otherProduct->description, 50) !!}
-                                        </p>
-                                        <h6 class="text mt-2">Rp. {{ number_format($otherProduct->price) }}</h6>
-                                        <a href="https://api.whatsapp.com/send?phone=6285930221410&text={{ urlencode('Halo, saya berminat untuk membeli ' . $otherProduct->product_name . ' Seharga Rp. ' . number_format($otherProduct->price)) }}"
-                                            target="_blank" style="text-decoration: none">
-                                            <h6 class="text text-success mt-3" style="cursor: pointer;"><i
-                                                    class="fa fa-whatsapp"></i> Hubungi Kami</h6>
-                                        </a>
-                                    </div>
-                                </a>
-                            </div>
+                                    <a href="https://api.whatsapp.com/send?phone=6285930221410&text={{ urlencode('Halo, saya berminat untuk membeli ' . $otherProduct->product_name . ' Seharga Rp. ' . number_format($otherProduct->price-$otherProduct->discount)) }}"
+                                        target="_blank" style="text-decoration: none">
+                                        <h6 class="text text-success mt-3" style="cursor: pointer;"><i
+                                                class="fa fa-whatsapp"></i> Hubungi Kami</h6>
+                                    </a>
+                                </div>
+                            </a>
                         </div>
+                    </div>
                     @endforeach
                 </div>
             </div>

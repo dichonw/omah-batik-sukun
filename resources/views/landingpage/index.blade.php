@@ -59,18 +59,18 @@
                 </div>
                 <div class="row" style="padding-top: 30px;">
                     <div class="col-lg-6">
-                        <img src="assets/img/TentangBaru.png" class="img-fluid" alt="Omah Batik Sukun" width="100%">
+                        <img src="{{ asset('/') }}assets/img/TentangBaru.png" class="img-fluid" alt="Omah Batik Sukun" width="100%">
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0">
                         <h3>Omah Batik Sukun</h3>
                         <div style='text-align:justify;'>
-                            <p>
+                            <p style="font-size: 16px;">
                                 Omah Batik adalah sebuah UMKM yang berlokasi di Kota Malang dan mengusung misi untuk
                                 melestarikan warisan budaya Indonesia melalui seni tradisional batik. Dengan keahlian
                                 dan dedikasi yang tinggi, Omah Batik menggabungkan sentuhan modern dengan desain
                                 tradisional yang elegan.
                             </p>
-                            <p>
+                            <p style="font-size: 16px;">
                                 Setiap produk batik yang dihasilkan oleh Omah Batik merupakan karya seni yang diolah
                                 dengan penuh perhatian terhadap detail. Mengambil inspirasi dari keanekaragaman budaya
                                 Indonesia, setiap motif batik diciptakan dengan penuh cinta dan inovasi. Mulai
@@ -101,29 +101,26 @@
                                         <img src="{{ asset('/assets/img/product') }}/{{ $product->image }}"
                                             class="card-img-top" alt="..."
                                             style="
-                                            object-fit: none;
-                                            object-position: center;
-                                            height: 280px;
+                                            max-height: 400px;
                                             width: 100%;">
                                     @else
                                         <img src="https://www.freeiconspng.com/uploads/file-txt-icon--icon-search-engine--iconfinder-14.png"
                                             class="card-img-top" alt="..."
                                             style="
-                                            object-fit: none;
-                                            object-position: center;
-                                            height: 280px;
+                                            max-height: 400px;
                                             width: 100%;">
                                     @endif
                                     <div class="card-body">
                                         <h5 class="card-text"
-                                            style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                                            style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 18px;">
                                             {{ $product->product_name }}</h5>
-                                        <p class="card-text-detail"
-                                            style="margin: 0 auto; font-size: 12px; color: rgb(80, 82, 82);">
-                                            {!! Str::limit($product->description, 50) !!}
-                                        </p>
-                                        <h6 class="text mt-2">Rp. {{ number_format($product->price) }}</h6>
-                                        <a href="https://api.whatsapp.com/send?phone=6285930221410&text={{ urlencode('Halo, saya berminat untuk membeli ' . $product->product_name . ' Seharga Rp. ' . number_format($product->price)) }}"
+                                        @if ($product->discount > 0)
+                                            <s><h6 class="text mt-2" style="font-size: 14px; color: rgb(156, 155, 154);">Rp. {{ number_format($product->price) }}</h6></s>
+                                            <h6 class="text mt-2" style="font-size: 16px">Rp. {{ number_format($product->price - $product->discount) }}</h6>
+                                        @else
+                                            <h6 class="text mt-2" style="font-size: 16px">Rp. {{ number_format($product->price) }}</h6>
+                                        @endif
+                                        <a href="https://api.whatsapp.com/send?phone=6285930221410&text={{ urlencode('Halo, saya berminat untuk membeli ' . $product->product_name . ' Seharga Rp. ' . number_format($product->price-$product->discount)) }}"
                                             target="_blank" style="text-decoration: none">
                                             <h6 class="text text-success mt-3" style="cursor: pointer;"><i
                                                     class="fa fa-whatsapp"></i> Hubungi Kami</h6>
@@ -242,12 +239,11 @@
                                             <i class="fa fa-clock-o"></i>&nbsp;
                                             {{ $article->created_at->format('d/m/Y') }}
                                         </p>
-                                        <p class="card-text-detail"
-                                            style="margin: 0 auto; font-size: 8px; color: rgb(80, 82, 82);">
+                                        <div class="card-text-detail"
+                                            style="margin: 0 auto; font-size: 14px; color: rgb(80, 82, 82);">
                                             {!! Str::limit($article->description, 50) !!}
-                                        </p>
-                                        <h6 class="text mt-2" style="font-style: italic;color: rgb(80, 82, 82);">Read
-                                            More ></h6>
+                                        </div>
+                                        <div class="text mt-2" style="font-style: italic;color: rgb(80, 82, 82); font-size: 14px;">Selengkapnya ></div>
                                         {{-- @if ($article->updated_at != $article->created_at)
                                             <div class="form-text text-secondary text-end mb-2">
                                             *Article has been edited at {{$article->updated_at->format('d/m/Y')}}
@@ -276,61 +272,78 @@
                         segera menghubungi kami</p>
                 </div>
                 <div class="row" mt-5 mb-5>
-                    <div class="container-contact align-items-center">
+                    <div class="col-lg-6">
                         <div class="col-lg">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="info-box">
-                                        <i class="fa fa-map-marker fa-2x"></i>
-                                        <h3>Alamat</h3>
-                                        <p>Kampung Terapi Hijau RW 03 Kelurahan Sukun, Kota Malang.</p>
-                                    </div>
+                                    <a href="https://www.google.com/maps/place/Omah+Batik/@-8.0059143,112.6159491,17z/data=!3m1!4b1!4m6!3m5!1s0x2dd62802a130a4f3:0x9f05b3b40d2e2493!8m2!3d-8.0059196!4d112.618524!16s%2Fg%2F11snnmc1j3?entry=ttu" 
+                                    style="text-decoration: none;" target="_blank">
+                                        <div class="info-box">
+                                            <i class="fa fa-map-marker fa-2x"></i>
+                                            <h3>Alamat</h3>
+                                            <p>Jl. S. Supriadi, Sukun, Kec. Sukun, Kota Malang, Jawa Timur</p>
+                                        </div>
+                                    </a>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="info-box mt-4">
-                                        <i class="fa fa-instagram fa-2x"></i>
-                                        <h3>Instagram</h3>
-                                        <p><a>@omahbatiksukun</span></a></p>
-                                    </div>
+                                    <a href="https://www.instagram.com/omahbatiksukun/" style="text-decoration: none;" target="_blank">
+                                        <div class="info-box mt-4">
+                                            <i class="fa fa-instagram fa-2x"></i>
+                                            <h3>Instagram</h3>
+                                            <p><a>@omahbatiksukun</span></a></p>
+                                        </div>
+                                    </a>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="info-box mt-4">
-                                        <i class="fa fa-whatsapp fa-2x"></i>
-                                        <h3>Whatsapp</h3>
-                                        <p><a>082331257347</a></p>
-                                    </div>
+                                    <a href="https://api.whatsapp.com/send?phone=6282331257347" style="text-decoration: none;" target="_blank">
+                                        <div class="info-box mt-4">
+                                            <i class="fa fa-whatsapp fa-2x"></i>
+                                            <h3>Whatsapp</h3>
+                                            <p><a>082331257347</a></p>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    {{-- <div class="col-lg-6">
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                    <div class="col-lg-6">
+                        <form action="/send_mail" method="post" role="form" class="php-email-form">
+                            @csrf
+                            <h5 class="text-grey mb-3">Tinggalkan Pesan</h5>
+                            @if (session('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ session('success') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
+                            @if (session('error'))
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ session('error') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <input type="text" name="name" class="form-control" id="name"
-                                        placeholder="Your Name" required>
+                                    <input type="text" name="name" class="form-control" 
+                                        placeholder="Nama anda" required>
                                 </div>
                                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                                    <input type="email" class="form-control" name="email" id="email"
-                                        placeholder="Your Email" required>
+                                    <input type="email" class="form-control" name="email" 
+                                        placeholder="Email anda" required>
                                 </div>
                             </div>
                             <div class="form-group mt-3">
-                                <input type="text" class="form-control" name="subject" id="subject"
-                                    placeholder="Subject" required>
-                            </div>
-                            <div class="form-group mt-3">
-                                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                                <textarea class="form-control" name="message" rows="5" placeholder="Pesan anda" required></textarea>
                             </div>
                             <div class="my-3">
                                 <div class="loading">Loading</div>
                                 <div class="error-message"></div>
                                 <div class="sent-message">Your message has been sent. Thank you!</div>
                             </div>
-                            <div class="text-center"><button type="submit">Send Message</button></div>
+                            <div class="text-center"><button type="submit">Kirim Pesan</button></div>
                         </form>
-                    </div> --}}
+                    </div>
 
                 </div>
             </div>

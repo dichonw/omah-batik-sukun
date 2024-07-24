@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProductModel;
 use App\Models\ArticleModel;
+use App\Mail\MailSend;
+use Illuminate\Support\Facades\Mail;
 
 class LandingpageController extends Controller
 {
@@ -31,5 +33,18 @@ class LandingpageController extends Controller
         return view('landingpage.contents.detailArticle', [
             'dataArticle' => $dataArticle,
         ]);
+    }
+
+    public function send_mail(Request $request)
+    {
+        $details = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'message' => $request->message
+        ];
+
+        Mail::to($request->email)->send(new MailSend($details));
+
+        return redirect()->back()->with('success', 'Pesan berhasil dikirim!');
     }
 }
